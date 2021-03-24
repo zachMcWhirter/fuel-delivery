@@ -67,7 +67,7 @@ response:
     "fuelLevel": 10000.0
 }
 ```
-2. Truck drives to the next stop, and delivers the fuel
+2. Truck drives to the next stop and delivers the fuel
 3. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -99,7 +99,7 @@ response:
    }
 }
 ```
-4. Truck drives to the next stop, and delivers the fuel
+4. Truck drives to the next stop and delivers the fuel
 5. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -131,7 +131,7 @@ response:
    }
 }
 ```
-6. Truck drives to the next stop, and delivers the fuel
+6. Truck drives to the next stop and delivers the fuel
 7. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -163,7 +163,7 @@ response:
    }
 }
 ```
-8. Truck drives to the next stop, and delivers the fuel
+8. Truck drives to the next stop and delivers the fuel
 9. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -195,7 +195,7 @@ response:
    }
 }
 ```
-10. Truck drives to the next stop, and delivers the fuel
+10. Truck drives to the next stop and delivers the fuel
 11. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -227,7 +227,7 @@ response:
    }
 }
 ```
-12. Truck drives to the next stop, and delivers the fuel
+12. Truck drives to the next stop and delivers the fuel
 13. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -292,5 +292,5 @@ response:
    }
 }
 ```
-16. Truck drives to the next stop, and delivers the fuel
+16. Truck drives to the next stop and delivers the fuel
 
