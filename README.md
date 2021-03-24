@@ -295,4 +295,4 @@ response:
 16. Truck drives to the next stop and delivers the fuel
 ---
 
-[DB Diagram](https://dbdiagram.io/d/605b7c50ecb54e10c33d17a8)
+[**Link to DB Diagram**](https://dbdiagram.io/d/605b7c50ecb54e10c33d17a8)
