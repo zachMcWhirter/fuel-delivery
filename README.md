@@ -50,28 +50,28 @@ POST /trucks/I<truck_id>
 response:
 ```
 {
-   "currentStop": {  
+    "currentStop": {  
         "id": "1", 
         "nextScheduledService": "datetime",
         "title", "Bobs Truck Stop",
         "address": "1505 Bob Road, Nashville, TN 37214"
-     },
- "nextStop": {  
+    },
+    "nextStop": {  
         "id":  "2", 
-         "nextScheduledService": "datetime",
-         "title", "Bills Truck Stop",
-         "address": "1505 Bill Road, Nashville, TN 37214"
-     },
-   "fuelLevel": 10000.0
+        "nextScheduledService": "datetime",
+        "title", "Bills Truck Stop",
+        "address": "1505 Bill Road, Nashville, TN 37214"
+    },
+    "fuelLevel": 10000.0
 }
 ```
 2. Truck drives to the next stop, and delivers the fuel
 3. Truck reports new fuel level to server
 ```
-POST /fllup
+POST /fillup
 {
-   "gallons": 1000.0,
-    "stopId" : "1",
+    "gallons": 1500.0,
+    "stopId" : "2",
     "truckId": "1"
 }
 ```
@@ -79,27 +79,204 @@ response:
 ```
 {
 	"truck": {
-	  "currentStop": {  
-        "id": "2", 
-        "nextScheduledService": "datetime",
-        "title", "Bills Truck Stop",
-        "address": "1505 Bob Road, Nashville, TN 37207"
-       },
-      "nextStop": {  
-     	"id":  "3", 
-     	"nextScheduledService": "datetime",
-     	"title", "Sues Truck Stop",
-     	"address": "1505 Sue Road, Nashville, TN 37207"
-     },
-   "fuelLevel": 9000.0
+        "currentStop": {  
+            "id": "2", 
+            "nextScheduledService": "datetime",
+            "title", "Bills Truck Stop",
+            "address": "1505 Bill Road, Nashville, TN 37216"
+        },
+        "nextStop": {  
+            "id":  "3", 
+            "nextScheduledService": "datetime",
+            "title", "Sues Truck Stop",
+            "address": "1505 Sue Road, Nashville, TN 37216"
+        },
+        "fuelLevel": 8500.0
    }
 }
 ```
 4. Truck drives to the next stop, and delivers the fuel
 5. Truck reports new fuel level to server
-6. Truck sends `GET` request to server asking for the new value of `CurrentFuelLevel`
-7. *IF* `CurrentFuelLevel` > 17% of `Capacity`
-	- Truck sends a `GET` request to server asking for the next stop again
-8. The process described in steps 2-7 are repeated until `CurrentFuelLevel` < 17% of `Capacity`
-	- At which point the Truck returns to refill and we begin the process over again at Step 1
+```
+POST /fillup
+{
+    "gallons": 1200.0,
+    "stopId" : "3",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+        "currentStop": {  
+            "id":  "3", 
+            "nextScheduledService": "datetime",
+            "title", "Sues Truck Stop",
+            "address": "1505 Sue Road, Nashville, TN 37207"
+        },
+        "nextStop": {  
+            "id":  "4", 
+            "nextScheduledService": "datetime",
+            "title", "Joes Truck Stop",
+            "address": "1505 Joe Road, Nashville, TN 37076"
+        },
+        "fuelLevel": 7300.0
+   }
+}
+```
+6. Truck drives to the next stop, and delivers the fuel
+7. Truck reports new fuel level to server
+```
+POST /fillup
+{
+    "gallons": 1700.0,
+    "stopId" : "4",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+        "currentStop": {  
+            "id":  "4", 
+            "nextScheduledService": "datetime",
+            "title", "Joes Truck Stop",
+            "address": "1505 Joe Road, Nashville, TN 37076"
+        },
+        "nextStop": {  
+            "id":  "5", 
+            "nextScheduledService": "datetime",
+            "title", "Janes Truck Stop",
+            "address": "1505 Jane Road, Nashville, TN 37206"
+        },
+        "fuelLevel": 5600.0
+   }
+}
+```
+8. Truck drives to the next stop, and delivers the fuel
+9. Truck reports new fuel level to server
+```
+POST /fillup
+{
+    "gallons": 1600.0,
+    "stopId" : "5",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+        "currentStop": {  
+            "id":  "5", 
+            "nextScheduledService": "datetime",
+            "title", "Janes Truck Stop",
+            "address": "1505 Jane Road, Nashville, TN 37206"
+        },
+        "nextStop": {  
+            "id":  "6", 
+            "nextScheduledService": "datetime",
+            "title", "Johns Truck Stop",
+            "address": "1505 John Road, Nashville, TN 37206"
+        },
+        "fuelLevel": 4000.0
+   }
+}
+```
+10. Truck drives to the next stop, and delivers the fuel
+11. Truck reports new fuel level to server
+```
+POST /fillup
+{
+    "gallons": 1400.0,
+    "stopId" : "6",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+        "currentStop": {  
+            "id":  "6", 
+            "nextScheduledService": "datetime",
+            "title", "Johns Truck Stop",
+            "address": "1505 John Road, Nashville, TN 37206"
+        },
+        "nextStop": {  
+            "id":  "7", 
+            "nextScheduledService": "datetime",
+            "title", "Jacks Truck Stop",
+            "address": "1505 Jack Road, Nashville, TN 37216"
+        },
+        "fuelLevel": 2600.0
+   }
+}
+```
+12. Truck drives to the next stop, and delivers the fuel
+13. Truck reports new fuel level to server
+```
+POST /fillup
+{
+    "gallons": 1500.0,
+    "stopId" : "7",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+        "currentStop": {  
+            "id":  "7", 
+            "nextScheduledService": "datetime",
+            "title", "Jacks Truck Stop",
+            "address": "1505 Jack Road, Nashville, TN 37216"
+        },
+        "nextStop": {  
+            "Return for Fill Up"
+            "id":  "8", 
+            "nextScheduledService": "datetime",
+            "title", "Headquarters",
+            "address": "101 Fill Up Road, Nashville, TN 37204"
+        },
+        "fuelLevel": 1100.0
+   }
+}
+```
+14. Truck returns to refill
+15. Truck reports new fuel level to server
+```
+POST /fillup
+{
+    "gallons": 10000.0,
+    "stopId" : "8",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+        "currentStop": { 
+        	"Return for Fill Up"
+            "id":  "8", 
+            "nextScheduledService": "datetime",
+            "title", "Headquarters",
+            "address": "101 Fill Up Road, Nashville, TN 37204"
+            
+        },
+        "nextStop": {  
+			"id":  "9", 
+            "nextScheduledService": "datetime",
+            "title", "Sams Truck Stop",
+            "address": "1505 Sam Road, Nashville, TN 37216"
+        },
+        "fuelLevel": 10000.0
+   }
+}
+```
+16. Truck drives to the next stop, and delivers the fuel
 
