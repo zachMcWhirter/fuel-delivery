@@ -44,7 +44,7 @@ be set to a special “stop” to instruct it to return for refill)
 ```
 POST /trucks/I<truck_id>
 {
-   "status": "in-service"
+   "status": "true"
 }
 ```
 response:
@@ -54,13 +54,15 @@ response:
         "id": "1", 
         "nextScheduledService": "datetime",
         "title", "Bobs Truck Stop",
-        "address": "1505 Bob Road, Nashville, TN 37214"
+        "address": "1505 Bob Road, Nashville, TN 37214",
+        "type": "delivery
     },
     "nextStop": {  
         "id":  "2", 
         "nextScheduledService": "datetime",
         "title", "Bills Truck Stop",
-        "address": "1505 Bill Road, Nashville, TN 37214"
+        "address": "1505 Bill Road, Nashville, TN 37214",
+        "type": "delivery"
     },
     "fuelLevel": 10000.0
 }
@@ -83,13 +85,15 @@ response:
             "id": "2", 
             "nextScheduledService": "datetime",
             "title", "Bills Truck Stop",
-            "address": "1505 Bill Road, Nashville, TN 37216"
+            "address": "1505 Bill Road, Nashville, TN 37216",
+            "type": "delivery"
         },
         "nextStop": {  
             "id":  "3", 
             "nextScheduledService": "datetime",
             "title", "Sues Truck Stop",
-            "address": "1505 Sue Road, Nashville, TN 37216"
+            "address": "1505 Sue Road, Nashville, TN 37216",
+            "type": "delivery"
         },
         "fuelLevel": 8500.0
    }
@@ -113,13 +117,15 @@ response:
             "id":  "3", 
             "nextScheduledService": "datetime",
             "title", "Sues Truck Stop",
-            "address": "1505 Sue Road, Nashville, TN 37207"
+            "address": "1505 Sue Road, Nashville, TN 37207",
+            "type": "delivery"
         },
         "nextStop": {  
             "id":  "4", 
             "nextScheduledService": "datetime",
             "title", "Joes Truck Stop",
-            "address": "1505 Joe Road, Nashville, TN 37076"
+            "address": "1505 Joe Road, Nashville, TN 37076",
+            "type": "delivery"
         },
         "fuelLevel": 7300.0
    }
@@ -143,13 +149,15 @@ response:
             "id":  "4", 
             "nextScheduledService": "datetime",
             "title", "Joes Truck Stop",
-            "address": "1505 Joe Road, Nashville, TN 37076"
+            "address": "1505 Joe Road, Nashville, TN 37076",
+            "type": "delivery"
         },
         "nextStop": {  
             "id":  "5", 
             "nextScheduledService": "datetime",
             "title", "Janes Truck Stop",
-            "address": "1505 Jane Road, Nashville, TN 37206"
+            "address": "1505 Jane Road, Nashville, TN 37206",
+            "type": "delivery"
         },
         "fuelLevel": 5600.0
    }
@@ -173,13 +181,15 @@ response:
             "id":  "5", 
             "nextScheduledService": "datetime",
             "title", "Janes Truck Stop",
-            "address": "1505 Jane Road, Nashville, TN 37206"
+            "address": "1505 Jane Road, Nashville, TN 37206",
+            "type": "delivery"
         },
         "nextStop": {  
             "id":  "6", 
             "nextScheduledService": "datetime",
             "title", "Johns Truck Stop",
-            "address": "1505 John Road, Nashville, TN 37206"
+            "address": "1505 John Road, Nashville, TN 37206",
+            "type": "delivery"
         },
         "fuelLevel": 4000.0
    }
@@ -203,13 +213,15 @@ response:
             "id":  "6", 
             "nextScheduledService": "datetime",
             "title", "Johns Truck Stop",
-            "address": "1505 John Road, Nashville, TN 37206"
+            "address": "1505 John Road, Nashville, TN 37206",
+            "type": "delivery"
         },
         "nextStop": {  
             "id":  "7", 
             "nextScheduledService": "datetime",
             "title", "Jacks Truck Stop",
-            "address": "1505 Jack Road, Nashville, TN 37216"
+            "address": "1505 Jack Road, Nashville, TN 37216",
+            "type": "delivery"
         },
         "fuelLevel": 2600.0
    }
@@ -233,14 +245,15 @@ response:
             "id":  "7", 
             "nextScheduledService": "datetime",
             "title", "Jacks Truck Stop",
-            "address": "1505 Jack Road, Nashville, TN 37216"
+            "address": "1505 Jack Road, Nashville, TN 37216",
+            "type": "delivery"
         },
         "nextStop": {  
-            "Return for Fill Up"
             "id":  "8", 
             "nextScheduledService": "datetime",
             "title", "Headquarters",
-            "address": "101 Fill Up Road, Nashville, TN 37204"
+            "address": "101 Fill Up Road, Nashville, TN 37204",
+            "type": "fill up"
         },
         "fuelLevel": 1100.0
    }
@@ -261,18 +274,19 @@ response:
 {
 	"truck": {
         "currentStop": { 
-        	"Return for Fill Up"
             "id":  "8", 
             "nextScheduledService": "datetime",
             "title", "Headquarters",
-            "address": "101 Fill Up Road, Nashville, TN 37204"
+            "address": "101 Fill Up Road, Nashville, TN 37204",
+            "type": "fill up"
             
         },
         "nextStop": {  
 			"id":  "9", 
             "nextScheduledService": "datetime",
-            "title", "Sams Truck Stop",
-            "address": "1505 Sam Road, Nashville, TN 37216"
+            "title", "Chucks Truck Stop",
+            "address": "1505 Sam Road, Nashville, TN 37216",
+            "type": "delivery"
         },
         "fuelLevel": 10000.0
    }
