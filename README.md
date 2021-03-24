@@ -40,11 +40,63 @@ be set to a special “stop” to instruct it to return for refill)
 
 ## Sequence of Events and DB Requests required to provide functionality
 
-1. Truck fills up to capacity (10000 gallons) and sends a `POST` request to the server to change the property of `CurrentFuelLevel` to represent the new value
-2. Truck sends a `GET` request to server asking for the next stop (which will be the nearest stop scheduled for service that day)
-3. Server sends the response to the truck in the form of json data
-4. Truck departs and drives to the next stop provided, and proceeds to deliver fuel to that stop
-5. Truck sends a `POST` request to the server to change the properties of `CurrentFuelLevel` to represent the new value
+1. Truck sends `POST` request to start route
+```
+POST /trucks/I<truck_id>
+{
+   "status": "in-service"
+}
+```
+response:
+```
+{
+   "currentStop": {  
+        "id": "1", 
+        "nextScheduledService": "datetime",
+        "title", "Bobs Truck Stop",
+        "address": "1505 Bob Road, Nashville, TN 37214"
+     },
+ "nextStop": {  
+        "id":  "2", 
+         "nextScheduledService": "datetime",
+         "title", "Bills Truck Stop",
+         "address": "1505 Bill Road, Nashville, TN 37214"
+     },
+   "fuelLevel": 10000.0
+}
+```
+2. Truck drives to the next stop, and delivers the fuel
+3. Truck reports new fuel level to server
+```
+POST /fllup
+{
+   "gallons": 1000.0,
+    "stopId" : "1",
+    "truckId": "1"
+}
+```
+response:
+```
+{
+	"truck": {
+	  "currentStop": {  
+        "id": "2", 
+        "nextScheduledService": "datetime",
+        "title", "Bills Truck Stop",
+        "address": "1505 Bob Road, Nashville, TN 37207"
+       },
+      "nextStop": {  
+     	"id":  "3", 
+     	"nextScheduledService": "datetime",
+     	"title", "Sues Truck Stop",
+     	"address": "1505 Sue Road, Nashville, TN 37207"
+     },
+   "fuelLevel": 9000.0
+   }
+}
+```
+4. Truck drives to the next stop, and delivers the fuel
+5. Truck reports new fuel level to server
 6. Truck sends `GET` request to server asking for the new value of `CurrentFuelLevel`
 7. *IF* `CurrentFuelLevel` > 17% of `Capacity`
 	- Truck sends a `GET` request to server asking for the next stop again
