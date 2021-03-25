@@ -77,7 +77,7 @@ POST /fillup
     "truckId": "1"
 }
 ```
-*Server needs to create the fillup and sub the gallons from the truck model.
+*Server needs to create the fillup and subtract the gallons from the truck model.
  Server also needs to move nextstop to currentStop on the truck. And then it needs to populate nextStop:*
 - if the truck has < 17% capacity then nextStop becomes the refuel station
 - otherwise, start with the closest store that needs servicing and make it currentStop
