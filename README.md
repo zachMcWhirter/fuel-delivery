@@ -55,7 +55,7 @@ response:
         "nextScheduledService": "datetime",
         "title", "Bobs Truck Stop",
         "address": "1505 Bob Road, Nashville, TN 37214",
-        "type": "delivery
+        "type": "delivery"
     },
     "nextStop": {  
         "id":  "2", 
@@ -77,8 +77,8 @@ POST /fillup
     "truckId": "1"
 }
 ```
-*server needs to create the fillup and sub the gallons from the truck model
-server also needs to move nextstop to currentStop on the truck. And then it needs to populate nextStop:*
+*Server needs to create the fillup and sub the gallons from the truck model.
+ Server also needs to move nextstop to currentStop on the truck. And then it needs to populate nextStop:*
 - if the truck has < 17% capacity then nextStop becomes the refuel station
 - otherwise, start with the closest store that needs servicing and make it currentStop
 - then check the next furthest one away and mark it as nextStop
