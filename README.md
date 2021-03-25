@@ -40,11 +40,11 @@ be set to a special “stop” to instruct it to return for refill)
 
 ## Sequence of Events and DB Requests required to provide functionality
 
-1. Truck sends `POST` request to start route
+1. Truck sends `PUT` request to start route
 ```
-POST /trucks/I<truck_id>
+PUT /trucks/<truck_id>
 {
-   "status": "true"
+   "inService": "true"
 }
 ```
 response:
@@ -77,6 +77,12 @@ POST /fillup
     "truckId": "1"
 }
 ```
+*server needs to create the fillup and sub the gallons from the truck model
+server also needs to move nextstop to currentStop on the truck. And then it needs to populate nextStop:*
+- if the truck has < 17% capacity then nextStop becomes the refuel station
+- otherwise, start with the closest store that needs servicing and make it currentStop
+- then check the next furthest one away and mark it as nextStop
+
 response:
 ```
 {
@@ -99,7 +105,7 @@ response:
    }
 }
 ```
-4. Truck drives to the next stop and delivers the fuel
+4. Truck drives to the next stop and delivers the fuel, or refills
 5. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -131,7 +137,7 @@ response:
    }
 }
 ```
-6. Truck drives to the next stop and delivers the fuel
+6. Truck drives to the next stop and delivers the fuel, or refills
 7. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -163,7 +169,7 @@ response:
    }
 }
 ```
-8. Truck drives to the next stop and delivers the fuel
+8. Truck drives to the next stop and delivers the fuel, or refills
 9. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -195,7 +201,7 @@ response:
    }
 }
 ```
-10. Truck drives to the next stop and delivers the fuel
+10. Truck drives to the next stop and delivers the fuel, or refills
 11. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -227,7 +233,7 @@ response:
    }
 }
 ```
-12. Truck drives to the next stop and delivers the fuel
+12. Truck drives to the next stop and delivers the fuel, or refills
 13. Truck reports new fuel level to server
 ```
 POST /fillup
@@ -259,40 +265,16 @@ response:
    }
 }
 ```
-14. Truck returns to refill
-15. Truck reports new fuel level to server
+14. If this was the last stop of the day, then server sets the next stop as "Headquarters" (see above response). Once the truck gets there, it sends a `PUT` request to mark itself out of service.
+
 ```
-POST /fillup
+PUT /trucks/<truck_id>
 {
-    "gallons": 10000.0,
-    "stopId" : "8",
-    "truckId": "1"
+   "inService": "false"
 }
 ```
-response:
-```
-{
-	"truck": {
-        "currentStop": { 
-            "id":  "8", 
-            "nextScheduledService": "datetime",
-            "title", "Headquarters",
-            "address": "101 Fill Up Road, Nashville, TN 37204",
-            "type": "fill up"
-            
-        },
-        "nextStop": {  
-			"id":  "9", 
-            "nextScheduledService": "datetime",
-            "title", "Chucks Truck Stop",
-            "address": "1505 Sam Road, Nashville, TN 37216",
-            "type": "delivery"
-        },
-        "fuelLevel": 10000.0
-   }
-}
-```
-16. Truck drives to the next stop and delivers the fuel
+
 ---
 
-[**Link to DB Diagram**](https://dbdiagram.io/d/605b7c50ecb54e10c33d17a8)
+
+### [**Link to DB Diagram**](https://dbdiagram.io/d/605b7c50ecb54e10c33d17a8)
